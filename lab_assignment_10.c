@@ -2,10 +2,38 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Trie node structure
+struct TrieNode
+{
+    int count;
+    struct TrieNode* children[26]; // for lowercase letters 'a' to 'z'
+};
+
+// Initializes a trie node
+struct TrieNode* createTrieNode()
+{
+    struct TrieNode* pNode = (struct TrieNode*)malloc(sizeof(struct TrieNode));
+    pNode->count = 0;
+    for (int i = 0; i < 26; i++)
+    {
+        pNode->children[i] = NULL;
+    }
+    return pNode;
+}
+
 // Trie structure
 struct Trie
-{	
+{
+	struct TrieNode* root;
 };
+
+// Initializes a trie structure
+struct Trie* createTrie()
+{
+    struct Trie* pTrie = (struct Trie*)malloc(sizeof(struct Trie));
+    pTrie->root = createTrieNode();
+    return pTrie;
+}
 
 // Inserts the word to the trie structure
 void insert(struct Trie *pTrie, char *word)
